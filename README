@@ -6,13 +6,13 @@ Simple.hs   solving specific games
 ???         generating a generic solver
 
     RESULTS THUS FAR
-Flaky. If the parameters are human-tweaked, success can be achieved. (Like all
-GAs/'machine' learning, hurr.)
+After some tweaking of fitness function and generation function, successfully
+solves problems and seems to generate pretty efficient results.
 
-Problem seems to lie in the code generation. It's either too shallow (and thus
-provides weak results and can't be crossed over) or deep enough to eat up
-memory 'til it hits the swap.
+Required human understanding of:
+ - algorithm size being a factor, with small size being a problem
+ - fitness function overvaluing size, resulting in fast size reduction
 
-Not sure if it's a laziness issue inside the library, or me misunderstanding
-and misusing it. Since the example's use of terminals (which should generate
-1-deep trees always?) confuses me, probably the second.
+This strikes me as reasonable, and implementation-specific understanding. It
+doesn't seem to be problem-specific overfitting, but very general stuff. That's
+good :)
