@@ -1,0 +1,18 @@
+Trying to solve trivial puzzles the easy way. With genetic programming.
+
+    OVERVIEW
+Game.hs     game rules
+Simple.hs   solving specific games
+???         generating a generic solver
+
+    RESULTS THUS FAR
+Flaky. If the parameters are human-tweaked, success can be achieved. (Like all
+GAs/'machine' learning, hurr.)
+
+Problem seems to lie in the code generation. It's either too shallow (and thus
+provides weak results and can't be crossed over) or deep enough to eat up
+memory 'til it hits the swap.
+
+Not sure if it's a laziness issue inside the library, or me misunderstanding
+and misusing it. Since the example's use of terminals (which should generate
+1-deep trees always?) confuses me, probably the second.
