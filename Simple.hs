@@ -9,6 +9,13 @@ import Game
 -- Define bytecode for operating on a puzzle.
 data E = Drag Int Int
        | Cons E E
+       -- Note: when I wrote this I was thinking "list of operations", though I
+       -- quickly realized that trees were probably better, and easier to build
+       -- in any case.
+       --
+       -- That's not interesting though. What's interesting is that the
+       -- useless, not-really-terminal "Done" appendix never ends up being used
+       -- in the solutions :)
        | Done
        deriving (Typeable,Data,Eq,Show)
 -- This is a bit overbuilt, since all that's needed is a list made from one
@@ -37,11 +44,11 @@ gameLen = 8
 --  * quality of solution
 --  * length of program (parsimony)
 -- Quality of solution is more important, so it's scaled by an arbitrary
--- factor. Which is actually not arbitrary but the game length, since I'm
--- guessing steps needed to solve are proportional to it.
--- Fitness function is being minimized.
+-- factor. Making it too makes the node count drop 'til crossing them over
+-- is pointless and no optimal solution is reachable.
+-- Not sure how to automate the discovery of this important fact.
 gameFitness :: Eq a => [a] -> [a] -> E -> Int
-gameFitness target scrambled e = gameLen*error+size where
+gameFitness target scrambled e = 50*error+size where
     error = wrong (eval e scrambled) target
     size = nodes e
 
