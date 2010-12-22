@@ -27,7 +27,7 @@ instance GenProg (Rand StdGen) E where
         r <- getRandomR (0,1)
         [ liftM2 Drag rndPos rndPos, return Done ] !! r where
             rndPos = getRandomR (0,gameLen-1)
-    nonterminal = liftM2 Cons nonterminal nonterminal
+    nonterminal = liftM2 Cons terminal terminal
         
 -- Only interested in problems of a constant length. Hard-coding this.
 gameLen :: Int
@@ -40,8 +40,8 @@ gameLen = 8
 -- factor. Which is actually not arbitrary but the game length, since I'm
 -- guessing steps needed to solve are proportional to it.
 -- Fitness function is being minimized.
-gameFitness :: Eq a => [a] -> [a] -> E -> (Int,Int)
-gameFitness target scrambled e = (error, size) where
+gameFitness :: Eq a => [a] -> [a] -> E -> Int
+gameFitness target scrambled e = gameLen*error+size where
     error = wrong (eval e scrambled) target
     size = nodes e
 
@@ -56,22 +56,22 @@ myFitness = gameFitness "NEXUSONE" "ENSNXUEO"
 -- And some evaluation functions for playing with the above in
 -- GHCI:
 trace :: [EvolState E]
-trace = do
-    let 
-        params = defaultEvolParams 
-            { fitness = realToFrac 
-                      . (\(err,size)->err+size) 
-                      . myFitness
-            }
-        g = mkStdGen 0
-    evalRand (evolveTrace params) g
+trace = evalRand (evolveTrace params) g where
+    params = defaultEvolParams { fitness = realToFrac . myFitness }
+    g = mkStdGen 0
 
 -- Apply some functions to all states.
 traceWith fs = map fs trace
 
-myTrace = traceWith $ showSt . unInd . best . pop where
-    showSt e = (err,size) where
-        err = wrong (eval e "ENSNXUEO") "NEXUSONE"
-        size = nodes e
+myTrace = traceWith $ showSt . pop where
+    showSt :: Pop E -> String
+    showSt e = concat [ "error:"++show (err e)
+                      , " nodes:"++show (size e)
+                      , " avg nodes:"++show (avgSize e)
+                      ] where
+        err e = wrong (eval e' "ENSNXUEO") "NEXUSONE"
+            where e' = unInd . best $ e
+        size = nodes . unInd . best 
+        avgSize = avgNodes
 eTrace = traceWith $ unInd . best . pop
 finalist = cachedBest $ last trace
