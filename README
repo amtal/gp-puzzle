@@ -16,3 +16,15 @@ Required human understanding of:
 This strikes me as reasonable, and implementation-specific understanding. It
 doesn't seem to be problem-specific overfitting, but very general stuff. That's
 good :)
+
+    SAMPLE OUTPUT
+*Main> :l Simple
+[1 of 2] Compiling Game             ( Game.hs, interpreted )
+[2 of 2] Compiling Main             ( Simple.hs, interpreted )
+Ok, modules loaded: Main, Game.
+*Main> myTrace
+["error:2 nodes:63 avg nodes:47.76","error:3 nodes:13 avg nodes:46.532","error:2 nodes:33 avg nodes:45.0","error:3 nodes:35 avg nodes:42.564","error:2 nodes:51 avg nodes:40.656","error:2 nodes:51 avg nodes:37.796","error:2 nodes:29 avg nodes:38.372","error:2 nodes:35 avg nodes:38.3","error:3 nodes:13 avg nodes:34.248","error:2 nodes:39 avg nodes:34.284","error:2 nodes:13 avg nodes:34.66","error:2 nodes:21 avg nodes:32.984","error:2 nodes:25 avg nodes:32.42","error:2 nodes:9 avg nodes:29.52","error:2 nodes:9 avg nodes:28.796","error:2 nodes:11 avg nodes:29.236","error:2 nodes:11 avg nodes:27.728","error:2 nodes:13 avg nodes:27.6","error:2 nodes:11 avg nodes:25.424","error:2 nodes:9 avg nodes:22.716","error:2 nodes:9 avg nodes:21.544","error:2 nodes:13 avg nodes:20.22","error:2 nodes:15 avg nodes:20.444","error:2 nodes:15 avg nodes:20.072","error:2 nodes:15 avg nodes:17.924","error:0 nodes:21 avg nodes:17.7","error:0 nodes:21 avg nodes:17.98","error:0 nodes:17 avg nodes:19.368","error:0 nodes:17 avg nodes:18.896","error:0 nodes:9 avg nodes:17.912","error:0 nodes:9 avg nodes:17.592","error:0 nodes:7 avg nodes:17.204","error:0 nodes:7 avg nodes:15.536","error:0 nodes:7 avg nodes:13.908","error:0 nodes:7 avg nodes:11.884","error:0 nodes:7 avg nodes:10.24","error:0 nodes:7 avg nodes:8.336","error:0 nodes:7 avg nodes:7.876","error:0 nodes:7 avg nodes:7.62","error:0 nodes:7 avg nodes:7.4","error:0 nodes:7 avg nodes:7.284","error:0 nodes:7 avg nodes:7.24","error:0 nodes:7 avg nodes:7.252","error:0 nodes:7 avg nodes:7.148","error:0 nodes:7 avg nodes:7.016","error:0 nodes:7 avg nodes:7.012","error:0 nodes:7 avg nodes:7.12","error:0 nodes:7 avg nodes:7.08","error:0 nodes:7 avg nodes:7.052","error:0 nodes:7 avg nodes:7.008"]
+*Main> finalist
+Ind {unInd = Cons (Cons (Drag 1 0) (Drag 7 5)) (Cons (Drag 2 5) (Drag 2 5)), aFitness = 0.125, iNodes = [4,1,0], eNodes = [6,5,3,2]}
+*Main> 
+
