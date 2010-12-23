@@ -64,7 +64,14 @@ myFitness = gameFitness "NEXUSONE" "ENSNXUEO"
 -- GHCI:
 trace :: [EvolState E]
 trace = evalRand (evolveTrace params) g where
-    params = defaultEvolParams { fitness = realToFrac . myFitness }
+    params = defaultEvolParams 
+        { fitness = realToFrac . myFitness 
+        -- for the sake of demonstration, I'll tighten the starting depth
+        -- since 6 is overkill for this problem and slows runtime
+        , iDepth = 4 
+        -- ditto for population size: 500 is larger than needed
+        , popSize = 250
+        }
     g = mkStdGen 0
 
 -- Apply some functions to all states.
@@ -80,5 +87,4 @@ myTrace = traceWith $ showSt . pop where
             where e' = unInd . best $ e
         size = nodes . unInd . best 
         avgSize = avgNodes
-eTrace = traceWith $ unInd . best . pop
 finalist = cachedBest $ last trace
